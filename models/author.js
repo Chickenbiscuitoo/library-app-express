@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const { DateTime } = require("luxon");
 
 var Schema = mongoose.Schema;
 
@@ -46,6 +47,15 @@ AuthorSchema
 .get(function () {
   return '/catalog/author/' + this._id;
 });
+
+AuthorSchema
+.virtual('lifespan')
+.get(function () {
+  const formated_date_of_birth = DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
+  const formated_date_of_death = this.date_of_death ? DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED) : 'X'
+
+  return `${formated_date_of_birth} - ${formated_date_of_death}`
+})
 
 //Export model
 module.exports = mongoose.model('Author', AuthorSchema);
