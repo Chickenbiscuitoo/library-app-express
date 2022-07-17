@@ -37,10 +37,6 @@ block content
             input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id, checked=genre.checked )
             label(for=genre._id) #{genre.name}
     button.btn.btn-primary(type='submit') Submit
-    p
-      a(href=book.url+'/delete') Delete Book
-    p
-      a(href=book.url+'/update') Update Book
 
   if errors
     ul
